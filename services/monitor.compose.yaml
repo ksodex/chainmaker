@@ -1,0 +1,30 @@
+services:
+    prometheus:
+        build:
+            context: ./prometheus
+            args:
+                BEACON_URL: localhost:8008
+        ports:
+            - "9090:9090"
+        volumes:
+            - "prometheus:/prometheus"
+        restart: unless-stopped
+
+    grafana:
+        build: ./grafana
+        container_name: grafana
+        ports:
+            - "3000:3000"
+        environment:
+            PROMETHEUS_URL: http://prometheus:9090
+        volumes:
+            - ./grafana/dashboards:/dashboards
+        depends_on:
+            - prometheus
+        restart: unless-stopped
+
+volumes:
+    prometheus:
+#   logs:
+#   grafana:
+#   grafana-dashboards:
