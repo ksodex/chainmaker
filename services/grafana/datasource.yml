@@ -1,9 +1,22 @@
 apiVersion: 1
 
 datasources:
-    - name: prometheus
-        type: prometheus
-        access: proxy
-        url: $PROMETHEUS_URL
-        uid: prometheus
-        isDefault: true
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    orgId: 1
+    url: http://172.16.0.20:9090
+    uuid: prometheus    #{DS_PROMETHEUS}
+    basicAuth: false
+    isDefault: true
+    editable: true
+
+  # - name: InfluxDB
+  #   type: influxdb
+  #   access: proxy
+  #   url: http://172.16.0.22:8086
+  #   uid: influxdb     # ${DS_INFLUXDB}
+  #   database: your_database_name
+  #   user: your_admin_user
+  #   password: your_admin_password
+  #   isDefault: false
